@@ -29,6 +29,8 @@ urlpatterns = [
     url(r'^index.html$', views.index),
     url(r'^signup.html$', views.signup),
     url(r'^login.html$', views.login),
+    url(r'^userOptions.html$', views.userOptions),
+    url(r'^userPanel.html$', views.userPanel),
 
     url(r'^admin/', admin.site.urls),
     url(r'^$',views.index)
