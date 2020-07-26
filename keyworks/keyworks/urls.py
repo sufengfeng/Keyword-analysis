@@ -16,11 +16,21 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
-#from keyworks import views
+
+from keyworks import settings
 from webdev import views
 
 urlpatterns = [
+
+    url(r'^index/1010/$', views.index),
+    url(r'^signup$', views.signup),
+    url(r'^login$', views.login),
+
+    url(r'^index.html$', views.index),
+    url(r'^signup.html$', views.signup),
+    url(r'^login.html$', views.login),
+
     url(r'^admin/', admin.site.urls),
-    url(r'^$',views.hello)
+    url(r'^$',views.index)
     #url(r'^name/',include('webdev.urls'))
 ]
