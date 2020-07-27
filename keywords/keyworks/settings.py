@@ -135,3 +135,5 @@ STATICFILES_DIRS = (
     '/path/to/others/static/',#其他静态文件的路径
 )
 #print(BASE_DIR)
+
+APPEND_SLASH=False
