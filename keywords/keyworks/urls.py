@@ -22,7 +22,7 @@ from webdev import views
 
 urlpatterns = [
 
-    url(r'^index/1010/$', views.index),
+    url(r'^index$', views.index),
     url(r'^signup$', views.signup),
     url(r'^login$', views.login),
 
