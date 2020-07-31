@@ -14,12 +14,23 @@ class User(models.Model):
     password = models.CharField(max_length=32)
     role = models.CharField(max_length=10)
     school = models.CharField(max_length=32)
-    marjor = models.CharField(max_length=32)
-    counte = models.IntegerField()
+    major = models.CharField(max_length=32)
+    counter = models.IntegerField()
     type = models.CharField(max_length=32)
 
     class Meta:
         unique_together = ("email",)
 
 
+class Article(models.Model):
+    email = models.EmailField()
+    title = models.CharField(max_length=32)
+    context = models.CharField(max_length=1024)
+
+    class Meta:
+        unique_together = ("email","title")
+
+
+
 admin.site.register(User)
+admin.site.register(Article)

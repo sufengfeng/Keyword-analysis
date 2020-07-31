@@ -27,21 +27,27 @@
             <div class="image-holder"></div>
             <form method="post">
                 <h2 class="text-center"><strong>Create</strong> an account.</h2>
-                <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Email"></div>
-                <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password"></div>
-                <div class="form-group"><input class="form-control" type="password" name="password-repeat" placeholder="Password (repeat)"></div>
-                <div class="form-group"><input class="form-control" type="email" name="school" placeholder="School/Company/Organization"></div>
-                <div class="form-group"><input class="form-control" type="email" name="major" placeholder="Major/Job Title"></div>
+                <div class="form-group"><input id="email" class="form-control" type="email" name="email" placeholder="Email"></div>
+                <div class="form-group"><input id="password" class="form-control" type="password" name="password" placeholder="Password"></div>
+                <div class="form-group"><input  class="form-control" type="password" name="password-repeat" placeholder="Password (repeat)"></div>
+                <div class="form-group"><input id="school"  class="form-control" type="text" name="school" placeholder="School/Company/Organization"></div>
+                <div class="form-group"><input id="major" class="form-control" type="text" name="major" placeholder="Major/Job Title"></div>
                 <div class="form-group">
                     <div></div>
                 </div><label class="custom-control-label" for="tou" style="font-size: 15px;">Agree to Term of Use and Privacy Policy</label>
-                <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="background-color: #2980ef;">Sign Up</button></div><a class="already" href="#">You already have an account? Login here.</a></form>
+                <div class="form-group"><button class="btn btn-primary btn-block"  style="background-color: #2980ef;" onclick="sign_up()">Sign Up</button> </div>
+                <a class="already" href="#">You already have an account? Login here.</a>
+            </form>
         </div>
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/chart.min.js"></script>
     <script src="assets/js/script.min.js"></script>
+<script>
+
+
+</script>
 </body>
 
 </html>

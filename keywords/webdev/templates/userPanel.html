@@ -19,7 +19,8 @@
                 <ul class="nav navbar-nav mr-auto">
                     <li class="nav-item" role="presentation"></li>
                     <li class="nav-item" role="presentation"></li>
-                </ul><span class="navbar-text actions" style="width: 162px;"> <a class="login" href="login.html" style="color: rgb(255,255,255);">Log In</a><a class="btn btn-light action-button" role="button" href="signup.html" style="background-color: rgba(86,124,198,0.77);">Sign Up</a></span></div>
+                    <li class="nav-item" role="presentation"></li>
+                </ul><span class="navbar-text actions" style="width: 162px;"> <a class="btn btn-light action-button" role="button" href="userOptions.html" style="background-color: rgba(86,124,198,0.77);">{{email}}</a><a class="login" href="login.html" style="color: rgb(255,255,255);">{{Log_In}}</a><a class="btn btn-light action-button" role="button" href="signup.html" style="background-color: rgba(86,124,198,0.77);">Sign Up</a></span></div>
         </div>
     </nav>
     <div class="article-list"></div>
@@ -38,38 +39,29 @@
                 </div>
             </div>
             <div class="row projects">
-                <div class="col-sm-6 item">
-                    <h3 class="name">Title1</h3>
-                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida.</p>
-                    <div class="btn-group" role="group"></div>
-                    <div class="row">
-                        <div class="col"><button class="btn btn-primary" type="button">Open</button><button class="btn btn-warning" type="button">Delete</button></div>
+
+<!--                <div class="col-sm-6 item">-->
+<!--                    <h3 class="name">Title1</h3>-->
+<!--                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida.</p>-->
+<!--                    <div class="btn-group" role="group"></div>-->
+<!--                    <div class="row">-->
+<!--                        <div class="col"><button class="btn btn-primary" type="button">Open</button><button class="btn btn-warning" type="button">Delete</button></div>-->
+<!--                    </div>-->
+<!--                </div>-->
+                {% for article in article_list %}
+
+                    <div class="col-sm-6 item">
+                        <h3 class="name">{{ article.title }}</h3>
+                        <p class="description">{{ article.context }}</p>
+                        <div class="btn-group" role="group"></div>
+                        <div class="row">
+                            <div class="col"><button class="btn btn-primary" type="button"  onclick="open_title({{ article.id }})">Open</button>
+                                <button class="btn btn-warning" type="button" onclick="delete_title({{ article.id }})" >Delete</button></div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-6 item">
-                    <h3 class="name">Title2</h3>
-                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida.</p>
-                    <div class="btn-group" role="group"></div>
-                    <div class="row">
-                        <div class="col"><button class="btn btn-primary" type="button">Open</button><button class="btn btn-warning" type="button">Delete</button></div>
-                    </div>
-                </div>
-                <div class="col-sm-6 item">
-                    <h3 class="name">Title3</h3>
-                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida.</p>
-                    <div class="btn-group" role="group"></div>
-                    <div class="row">
-                        <div class="col"><button class="btn btn-primary" type="button">Open</button><button class="btn btn-warning" type="button">Delete</button></div>
-                    </div>
-                </div>
-                <div class="col-sm-6 item">
-                    <h3 class="name">Title4</h3>
-                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida.</p>
-                    <div class="btn-group" role="group"></div>
-                    <div class="row">
-                        <div class="col"><button class="btn btn-primary" type="button">Open</button><button class="btn btn-warning" type="button">Delete</button></div>
-                    </div>
-                </div>
+
+                {% endfor %}
+
             </div>
         </div>
     </div>
@@ -77,7 +69,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <p>User Preference:</p><button class="btn btn-primary" type="button">View/Update</button></div>
+                    <p>User Preference:</p><button class="btn btn-primary" type="button"  onclick="javascrtpt:window.location.href='userOptions.html'">View/Update</button></div>
                 <div class="col-md-4"></div>
                 <div class="col-md-4"></div>
             </div>
@@ -122,5 +114,29 @@
     <script src="assets/js/chart.min.js"></script>
     <script src="assets/js/script.min.js"></script>
 </body>
+<script>
 
+    function open_title(index){
+        var params = {
+        "index":index,
+        };
+        $.get("open_title", params,
+          function(data){
+            alert("Data Loaded: " + data);
+            window.location.href="/";
+        });
+    }
+    function delete_title(index){
+        var params = {
+        "index":index,
+        };
+        $.get("delete_title", params,
+          function(data){
+            alert("Data Loaded: " + data);
+            window.location.href="userPanel.html";
+        });
+    }
+
+
+</script>
 </html>

@@ -19,7 +19,8 @@
                 <ul class="nav navbar-nav mr-auto">
                     <li class="nav-item" role="presentation"></li>
                     <li class="nav-item" role="presentation"></li>
-                </ul><span class="navbar-text actions" style="width: 162px;"> <a class="login" href="login.html" style="color: rgb(255,255,255);">Log In</a><a class="btn btn-light action-button" role="button" href="signup.html" style="background-color: rgba(86,124,198,0.77);">Sign Up</a></span></div>
+                    <li class="nav-item" role="presentation"></li>
+                </ul><span class="navbar-text actions" style="width: 162px;"> <a class="btn btn-light action-button" role="button" href="userOptions.html" style="background-color: rgba(86,124,198,0.77);">{{email}}</a><a class="login" href="login.html" style="color: rgb(255,255,255);">{{Log_In}}</a><a class="btn btn-light action-button" role="button" href="signup.html" style="background-color: rgba(86,124,198,0.77);">Sign Up</a></span></div>
         </div>
     </nav>
     <div class="article-list"></div>
@@ -43,10 +44,10 @@
         <div class="form-container">
             <form method="post">
                 <h2 class="text-center"><strong>User Preference</strong></h2>
-                <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password"></div>
-                <div class="form-group"><input class="form-control" type="password" name="password-repeat" placeholder="Password (repeat)"></div>
-                <div class="form-group"><input class="form-control" type="email" name="school" placeholder="School/Company/Organization"></div>
-                <div class="form-group"><input class="form-control" type="email" name="major" placeholder="Major/Job Title"></div>
+                <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password" value={{user.password}}> </div>
+                <div class="form-group"><input class="form-control" type="password" name="password-repeat" placeholder="Password (repeat)"  value={{user.password}}>  </div>
+                <div class="form-group"><input class="form-control" type="text" name="school" placeholder="School/Company/Organization" value={{user.school }}  ></div>
+                <div class="form-group"><input class="form-control" type="text" name="major" placeholder="Major/Job Title" value={{user.major}} > </div>
                 <div class="form-group">
                     <div></div>
                 </div><label class="custom-control-label" for="tou" style="font-size: 15px;">Agree to Term of Use and Privacy Policy</label>
