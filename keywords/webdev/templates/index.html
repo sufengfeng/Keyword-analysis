@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
     <link rel="stylesheet" href="assets/css/styles.min.css">
+    <link rel="stylesheet" href="assets/css/index.css">
 </head>
 
 <body style="filter: blur(0px);background-color: rgb(255,255,255);">
@@ -41,7 +42,7 @@
             <div class="row">
                 <div class="col-md-8" style="background-color: #eff7ff;padding: 16px;" >
                     <p><i class="fa fa-file-text"></i>&nbsp;Context:</p>
-                    <div id="context_area" style="border: 1px solid #CBCBCB;height: 400px;width: 600px;" contenteditable="true" >
+                    <div id="context_area" style="border: 1px solid #CBCBCB;height: 400px;width: 600px; overflow:auto;" contenteditable="true" >
                         {{article.context}}
                     </div>
 <!--                    <textarea id="context" class="shadow-sm form-control-lg" style="width: 607px;height: 400px;font-size: 14px;" name="context" placeholder="Please copy and paste your text."> <p>我的母亲有 <span style="color:blue">蓝色</span> 的眼睛。</p>{{article.context}}</textarea>-->
@@ -57,14 +58,15 @@
 
 
 
+                    <img src="assets/img/green.jpg"   />
+
                     <p>and:</p><div class="group">      
     <input type="text" required id="keyword02">
     <span class="highlight"></span>
     <span class="bar"></span>
     <label>Keyword 2</label>
 </div>
-
-
+                    <img src="assets/img/red.jpg"   />
 
                     <div class="btn-toolbar">
                         <div class="btn-group" role="group"></div>
@@ -109,7 +111,7 @@
                 <div class="col-md-12">
                     <p><i class="fa fa-gear"></i>&nbsp;Process:</p>
                     <div class="progress">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">80%</div>
+                        <div id="process" class="progress-bar progress-bar-striped progress-bar-animated" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">80%</div>
                     </div>
                     <p>&nbsp;</p>
                 </div>
@@ -126,9 +128,9 @@
             <div class="row people">
                 <div class="col-md-6 col-lg-4 item">
                     <div class="box">
-                        <p class="text-center">In your material, <span style="text-decoration: underline;">keyword1</span>&nbsp;has a <strong>strong </strong>correlation with <span style="text-decoration: underline;">keyword2</span>.</p>
-                        <p><span style="text-decoration: underline;">Keyword1</span> appeared <strong>57 time(s)</strong> while <span style="text-decoration: underline;">keyword2</span> appeared <strong>38 time(s)</strong>.</p>
-                        <p><strong>4 sentence(s)</strong>&nbsp;showed correlation.<br></p>
+                        <p class="text-center">In your material, <span id="keyword1" style="text-decoration: underline;">keyword1</span>&nbsp;has a <strong id="strong">strong </strong>correlation with <span id="keyword2" style="text-decoration: underline;">keyword2</span>.</p>
+                        <p><span id="keyword01_1" style="text-decoration: underline;">Keyword1</span> appeared <strong id="keyword01_show">57 time(s)</strong> while <span id="keyword02_01" style="text-decoration: underline;">keyword2</span> appeared <strong  id="keyword02_show"> 38 time(s)</strong>.</p>
+                        <p><strong id="sentence_re">4 sentence(s)</strong>&nbsp;showed correlation.<br></p>
                         <div><canvas data-bs-chart="{&quot;type&quot;:&quot;doughnut&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;Keyword1&quot;,&quot;Keyword2&quot;,&quot;Correlated&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;Correlation&quot;,&quot;backgroundColor&quot;:[&quot;rgb(78,160,150)&quot;,&quot;rgba(255,46,46,0.79)&quot;,&quot;rgba(216,48,159,0.79)&quot;],&quot;borderColor&quot;:[&quot;#ffffff&quot;,&quot;#ffffff&quot;,&quot;#ffffff&quot;],&quot;data&quot;:[&quot;57&quot;,&quot;38&quot;,&quot;4&quot;]}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:true,&quot;legend&quot;:{&quot;display&quot;:false},&quot;title&quot;:{}}}"></canvas></div>
                     </div>
                 </div>
@@ -189,166 +191,6 @@
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/chart.min.js"></script>
     <script src="assets/js/script.min.js"></script>
-    <textarea id="test"></textarea>
-<style>
-.intro_yellow
-{
-display: inline;
-background:rgba(255,255,0,0.2);
-}
-.intro_red
-{
-display: inline;
-background:rgba(255,0,0,0.2);
-}
-.intro_red
-{
-display: inline;
-background:rgba(255,0,0,0.2);
-}
-.intro_green
-{
-display: inline;
-background:rgba(0,255,0,0.2);
-}
-</style>
+    <script src="assets/js/index.js"></script>
 </body>
-<script>
-String.prototype.format = function(){
-    var args = arguments;
-    return this.replace(/\{(\d+)\}/gm, function(ms, p1){return typeof(args[p1]) == 'undefined' ? ms : args[p1]});
-}
-
-var str="{0},{1},hehe".format("hello","world"); //hello,world,hehe
-console.log(str)
-</script>
-
-
-<script>
-        var g_nearby_array01=new Array();
-        var g_nearby_array02=new Array();
-        var g_keyword01;
-        var g_keyword02;
-
-        function    format_span(strCenten){
-            var flag01=0;
-            var flag02=0;
-            var retStr="";
-            for(var i=0;i<g_nearby_array01.length;i++){
-                if(strCenten.indexOf(g_nearby_array01[i])!=-1){
-                    flag01=1;
-                    break;
-                }
-            }
-
-            for(var i=0;i<g_nearby_array02.length;i++){
-                if(strCenten.indexOf(g_nearby_array02[i])!=-1){
-                    flag02=1;
-                    break;
-                }
-            }
-            if(flag01==1&&flag02==1){               //增加底色
-                retStr="<div  class=\"intro_yellow\">{0}</div>".format(strCenten);
-            }
-            else{
-                retStr=strCenten;
-            }
-
-            var strArr4= new Array();
-            strArr4 = retStr.split(g_keyword01);
-            var retSTR="";
-            for(var i=0;i<strArr4.length-1;i++){
-                retSTR=strArr4[i];
-                retSTR=retSTR+"<div  class=\"intro_red\">{0}</div>".format(g_keyword01);
-            }
-            retSTR=retSTR+strArr4[strArr4.length-1];
-
-
-            return retSTR;
-
-        }
-        //获取div下所有内容
-        function get_div_context(){
-            var retStr=""
-            $("#context_area div").each(function(){         //所有的span标签
-                retStr=retStr+$(this).text()
-            });
-            retStr=retStr+context_area.innerHTML;
-            retStr="成功，是一个动宾结构的汉语名词。同“胜利”。意思是指达到或实现某种价值尺度的事情或事件，从而获得预期结果叫做成功。出自《书·禹贡》：“禹锡玄圭，告厥成功。” 成功是指人或动物通过有意识努力，达到了预期目标。成功在动物世界里没有对错，一切都是为了竞争资源。而在人类社会成功还有另外一个衡量维度，即那些通过合法的且符合道德约束的行为到达预期目标的人被称为”成功的人“。人生会经历无数的成功和失败，希望我们失败时不要气馁，因为只要我们找到正确的方式且付出行动去实现，我们一定会到达预期目标，一定会成功！";
-            return retStr;
-        }
-
-        function save_context(){
-            var div_context=get_div_context();
-			var params = {
-			"title":document.getElementById('title').value,
-			"context":div_context,
-			};
-            $.get("save_context", params,
-              function(data){
-                alert("Data Loaded: " + data);
-                window.location.href="userPanel.html";
-            });
-        }
-
-        function Check_keywords(){
-            g_keyword01=document.getElementById('keyword01').value;
-            g_keyword02=document.getElementById('keyword02').value;
-            g_keyword01="成功";
-            g_keyword02="达到";
-
-			var params = {
-
-			"keyword01":g_keyword01,
-			"keyword02":g_keyword02,
-			};
-
-            $.get("get_nearby", params,
-              function(data){
-
-              var obj =JSON.parse(data);
-              g_nearby_array01=obj["Keyword01"];
-              g_nearby_array02=obj["Keyword02"];
-              console.log(g_nearby_array01)
-              console.log(g_nearby_array02)
-
-            var div_context=get_div_context();
-            var centensArray= new Array();
-            var strArr3 = div_context.split(".");
-            for(var i=0;i<strArr3.length;i++){
-                var strArr4= new Array();
-                if(i<strArr3.length-1)
-                    strArr4 = (strArr3[i]+".").split("。");
-                else
-                    strArr4 = (strArr3[i]).split("。");
-                for(var j=0;j<strArr4.length;j++){
-                    if(j<strArr4.length-1)
-                        centensArray.push(strArr4[j]+"。");
-                     else
-                        centensArray.push(strArr4[j]);
-                }
-            }
-            //var spanStr="<span style=\"color:blue\">abc</span> ";
-            var spanStr="";
-
-            for(var i=0;i<centensArray.length;i++){
-               spanStr=spanStr+format_span(centensArray[i]);
-            }
-            console.log(spanStr);
-
-            context_area.innerHTML=spanStr;
-<!--                alert("Data Loaded: " + data);-->
-<!--                window.location.href="userPanel.html";-->
-            });
-        }
-
-</script>
-
-<script language="javascript">
-var str="<font><b>abcde</b></font>";
-txt=document.createElement('DIV');
-txt.innerHTML=str;
-test.appendChild(txt);
-window.onbeforeunload=function oLoad(){document.location.reload()}
-</script>
 </html>

@@ -1,0 +1,30 @@
+
+.intro_yellow
+{
+display: inline;
+background:rgba(255,255,0,0.2);
+}
+
+.intro_red
+{
+display: inline;
+background:rgba(255,0,0,0.2);
+}
+
+.intro_red_key
+{
+display: inline;
+background:rgba(255,0,0,0.8);
+}
+
+.intro_green
+{
+display: inline;
+background:rgba(0,255,0,0.2);
+}
+
+.intro_green_key
+{
+display: inline;
+background:rgba(0,255,0,0.8);
+}

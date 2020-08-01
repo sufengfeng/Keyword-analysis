@@ -9,6 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 from webdev import models
+from webdev.get_nearby import GetKeyWordList
 
 from webdev.models import User, Article
 
@@ -149,6 +150,9 @@ def save_context(request):
         return HttpResponse(retContext)
     except Exception as e:
         print(e)
+        models.Article.objects.filter(email=email, title=title).update(context=context)
+        retContext = "已存在当前title，更新数据..."
+        return HttpResponse(retContext)
     return HttpResponse(retContext)
 
 
@@ -174,21 +178,23 @@ def get_nearby(request):
 
     keyword01 = request.GET.get("keyword01")
     keyword02 = request.GET.get("keyword02")
-    # setKeyword01 = GetKeyWordList(keyword01)
-    setKeyword01 = {'失败', '急于', '获得成功', '取得成功', '最终', '尝试', '顺利', '事与愿违', '成功'}
-    # setKeyword02 = GetKeyWordList(keyword02)
-    setKeyword02 = {'cheque', '达到', 'bank', 'bank_check', 'stop', 'halt', 'check', 'release', 'tab', 'arrest',
-                    'stoppage', 'chit', 'assay', 'stay'}
+    if keyword01 == "" or keyword02 == "":
+        retContext = "请输入关键字"
+        return HttpResponse(retContext)
+    setKeyword01 = GetKeyWordList(keyword01)
+    # setKeyword01 = {'失败', '急于', '获得成功', '取得成功', '最终', '胜利', '顺利', '事与愿违', '成功'}
+    setKeyword02 = GetKeyWordList(keyword02)
+    # setKeyword02 = {'cheque', '达到', '行为', 'bank_check', 'stop', '一定', 'check', '合法', 'tab', 'arrest','stoppage', 'chit', 'assay', 'stay'}
     print(setKeyword01)
     print(setKeyword02)
     jsonRet = {}
     jsonRet["Keyword01"] = list(setKeyword01)
     jsonRet["Keyword02"] = list(setKeyword02)
-    counter=models.User.objects.filter(email=email).all()[0].counter
-    counter=counter+1
+    counter = models.User.objects.filter(email=email).all()[0].counter
+    counter = counter + 1
     models.User.objects.filter(email=email).update(counter=counter)
     return HttpResponse(json.dumps(jsonRet))
 
 
 def test(request):
-    return render(request,'test.html')
+    return render(request, 'test.html')
