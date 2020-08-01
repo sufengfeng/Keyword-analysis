@@ -198,3 +198,4 @@ def get_nearby(request):
 
 def test(request):
     return render(request, 'test.html')
+
