@@ -27,11 +27,11 @@ def index(request):
     email = request.session.get("email", None)  # 如果再次点击登录，则为退出当前用户
     context = {}
     if email:
-        context['Log_In'] = "Log Out"
-        context['email'] = email
+        context['Log_In'] = email
+        context['Sign_Up'] = "Log Out"
     else:
         context['Log_In'] = "Log In"
-        context['email'] = ""
+        context['Sign_Up'] = "Sign Up"
     if g_article != None:
         context['article'] = g_article
         g_article = None
@@ -40,9 +40,10 @@ def index(request):
 
 @csrf_exempt
 def signup(request):
-    if request.session.get("email", None):  # 如果再次点击登录，则为退出当前用户
+    if request.session.get("email", None):  # 如果已登录，则为退出功能，跳转到登录页面
         # 清除Cookie和Session数据
         request.session.flush()
+        return render(request, 'login.html')
     if request.method == "POST" and request.POST:
 
         email = request.POST["email"]
@@ -55,11 +56,11 @@ def signup(request):
 
         if password == password_repeat:
             try:
-                counte = 0
+                counter = 0
                 type = "basic"
                 # 若创建成功，则自动登录
                 ret = models.User.objects.create(email=email, password=password, role=role, school=school, major=major,
-                                                 counte=counte, type=type)
+                                                 counter=counter, type=type)
                 if ret:
                     request.session["email"] = email
                     # 设置超时时间 (Cookie和Session数据的)
@@ -106,8 +107,10 @@ def userOptions(request):
             major = request.POST.get("major")
             if password == password_repeat:
                 models.User.objects.filter(email=email).update(password=password, school=school, major=major)
-        context['Log_In'] = "Log Out"
-        context['email'] = email
+
+        context['Log_In'] = email
+        context['Sign_Up'] = "Log Out"
+
         user = User.objects.filter(email=email).all()
         user_list = list(user)
         context['user'] = user_list[0]
@@ -120,13 +123,15 @@ def userPanel(request):
     email = request.session.get("email", None)  # 如果再次点击登录，则为退出当前用户
     context = {}
     if email:
-        context['Log_In'] = "Log Out"
-        context['email'] = email
+        context['Log_In'] = email
+        context['Sign_Up'] = "Log Out"
+
         context['index'] = 0
 
         articles = Article.objects.filter(email=email).all()
         article_list = list(articles)
         context['article_list'] = article_list
+        context['list_len'] = len(article_list)
         return render(request, 'userPanel.html', context)
     return HttpResponse("用户未登录")
 
@@ -190,12 +195,23 @@ def get_nearby(request):
     jsonRet = {}
     jsonRet["Keyword01"] = list(setKeyword01)
     jsonRet["Keyword02"] = list(setKeyword02)
+
     counter = models.User.objects.filter(email=email).all()[0].counter
     counter = counter + 1
     models.User.objects.filter(email=email).update(counter=counter)
+
+
+
+    jsonRet["similiar"] = 1
+    jsonRet["p1"] = "1%"
+    jsonRet["p2"] = "0%"
+    school = {}
+    school["清华"]=1
+    school["北大"] = 1
+    jsonRet["school"] = school
+
     return HttpResponse(json.dumps(jsonRet))
 
 
 def test(request):
     return render(request, 'test.html')
-

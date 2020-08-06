@@ -1,3 +1,6 @@
+
+
+
         String.prototype.format = function(){
             var args = arguments;
             return this.replace(/\{(\d+)\}/gm, function(ms, p1){return typeof(args[p1]) == 'undefined' ? ms : args[p1]});
@@ -170,6 +173,11 @@
             sentence_re.innerHTML="{0} sentence(s)".format(g_counter_sentence_re);
             g_counter_sentence_re=0;
 
+            similiar.innerHTML=obj["similiar"];
+            p1.innerHTML=obj["p1"];
+            p2.innerHTML=obj["p2"];
+            var school=obj["school"];
+            console.log(school);
             });
         }
 
@@ -184,3 +192,6 @@ function clock()
         process.innerHTML=str;
     }
 }
+
+
+

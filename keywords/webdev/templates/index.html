@@ -10,6 +10,14 @@
     <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
     <link rel="stylesheet" href="assets/css/styles.min.css">
     <link rel="stylesheet" href="assets/css/index.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+
+   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
+   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
+   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script>
+   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/world.js"></script>
+   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
 </head>
 
 <body style="filter: blur(0px);background-color: rgb(255,255,255);">
@@ -21,8 +29,7 @@
                 <ul class="nav navbar-nav mr-auto">
                     <li class="nav-item" role="presentation"></li>
                     <li class="nav-item" role="presentation"></li>
-                    <li class="nav-item" role="presentation"></li>
-                </ul><span class="navbar-text actions" style="width: 162px;"> <a class="btn btn-light action-button" role="button" href="userOptions.html" style="background-color: rgba(86,124,198,0.77);">{{email}}</a><a class="login" href="login.html" style="color: rgb(255,255,255);">{{Log_In}}</a><a class="btn btn-light action-button" role="button" href="signup.html" style="background-color: rgba(86,124,198,0.77);">Sign Up</a></span></div>
+                </ul><span class="navbar-text actions" style="width: 162px;"> <a class="login" href="login.html" style="color: rgb(255,255,255);">{{Log_In}}</a><a class="btn btn-light action-button" role="button" href="signup.html" style="background-color: rgba(86,124,198,0.77);">{{Sign_Up}}</a></span></div>
         </div>
     </nav>
     <div class="container">
@@ -136,16 +143,20 @@
                 </div>
                 <div class="col-md-6 col-lg-4 item">
                     <div class="box">
-                        <p>There are <strong>12</strong> students writing similar topic as you during this semester.</p>
-                        <p><strong>35%</strong> of them use longer paragraphs than yours.</p>
-                        <p><strong>15%</strong> of their papers appear to be more connected.</p>
+                        <p>There are <strong id="similiar">12</strong> students writing similar topic as you during this semester.</p>
+                        <p><strong id="p1">35%</strong> of them use longer paragraphs than yours.</p>
+                        <p><strong id="p2">15%</strong> of their papers appear to be more connected.</p>
                         <div><canvas data-bs-chart="{&quot;type&quot;:&quot;radar&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;Similarity&quot;,&quot;Length&quot;,&quot;Consistency&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;Ability&quot;,&quot;backgroundColor&quot;:&quot;#4e73df&quot;,&quot;borderColor&quot;:&quot;#4e73df&quot;,&quot;data&quot;:[&quot;12&quot;,&quot;65&quot;,&quot;85&quot;],&quot;fill&quot;:true}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:true,&quot;legend&quot;:{&quot;display&quot;:false},&quot;title&quot;:{}}}"></canvas></div>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4 item">
                     <div class="box">
                         <p>Students writing this topic is in:</p>
-                        <div><canvas data-bs-chart="{&quot;type&quot;:&quot;horizontalBar&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;New York University&quot;,&quot;Princeton&quot;,&quot;Emory&quot;,&quot;Tsinghua University&quot;,&quot;Peking University&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;School&quot;,&quot;backgroundColor&quot;:&quot;#4e73df&quot;,&quot;borderColor&quot;:&quot;#4e73df&quot;,&quot;data&quot;:[&quot;15000&quot;,&quot;7800&quot;,&quot;6250&quot;,&quot;5300&quot;,&quot;4500&quot;]}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:true,&quot;legend&quot;:{&quot;display&quot;:false,&quot;position&quot;:&quot;top&quot;},&quot;title&quot;:{&quot;display&quot;:false},&quot;scales&quot;:{&quot;xAxes&quot;:[{&quot;ticks&quot;:{&quot;beginAtZero&quot;:false}}],&quot;yAxes&quot;:[{&quot;ticks&quot;:{&quot;beginAtZero&quot;:false}}]}}}"></canvas></div>
+                        <div>
+                            <canvas id="canvas" data-bs-chart="{&quot;type&quot;:&quot;horizontalBar&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;New York University&quot;,&quot;Princeton&quot;,&quot;Emory&quot;,&quot;Tsinghua University&quot;,&quot;Peking University&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;School&quot;,&quot;backgroundColor&quot;:&quot;#4e73df&quot;,&quot;borderColor&quot;:&quot;#4e73df&quot;,&quot;data&quot;:[&quot;15000&quot;,&quot;7800&quot;,&quot;6250&quot;,&quot;5300&quot;,&quot;4500&quot;]}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:true,&quot;legend&quot;:{&quot;display&quot;:false,&quot;position&quot;:&quot;top&quot;},&quot;title&quot;:{&quot;display&quot;:false},&quot;scales&quot;:{&quot;xAxes&quot;:[{&quot;ticks&quot;:{&quot;beginAtZero&quot;:false}}],&quot;yAxes&quot;:[{&quot;ticks&quot;:{&quot;beginAtZero&quot;:false}}]}}}">
+                        </canvas>
+
+                        </div>
                         <p>Potential research keywords:</p>
                         <p><em>Freedom, Safety, Pleasure.</em></p>
                     </div>
@@ -192,5 +203,7 @@
     <script src="assets/js/chart.min.js"></script>
     <script src="assets/js/script.min.js"></script>
     <script src="assets/js/index.js"></script>
+
 </body>
+
 </html>

@@ -25,7 +25,7 @@ class User(models.Model):
 class Article(models.Model):
     email = models.EmailField()
     title = models.CharField(max_length=32)
-    context = models.CharField(max_length=1024)
+    context = models.CharField(max_length=10240)
 
     class Meta:
         unique_together = ("email","title")
